@@ -1,0 +1,70 @@
+How to install WordPress on Ubuntu
+The experience of being a regular person sometimes become a hurdle in the technological thing. But in today's epoch, there exists no problem that does not have a solution. As stated once, "where there is a will, there's a way." And if you aren't about the hustles of developing a website from scratch, there are other possible ways to do that via content management (CMS) like WordPress. 
+WordPress is a mighty, free and open-source, profoundly pluggable and customizable CMS that is being utilized by millions throughout the globe to operate blogs and fully operative websites.
+It is simple to install and determine, especially for persons coming from the non-technical and unsocial background. With millions of plugins and themes accessible, developed by an enthusiastic and dedicated alliance of fellow users and developers, that you can utilize to tailor your blog or website to manage and see exactly the way you desire.
+Firstly, we will cover the steps to install LAMP (Linux, Apache, MySQL, PHP) so that we can install WordPress on our Ubuntu system:
+Step 1: Install Apache Web Server
+(The command needs to run on your terminal to install Apache Web Server)
+
+We need to allow Apache2 web server to start at system boot time, as well start the service as follows:
+
+To check whether the server is working, open your web browser and enter "http://server_address." The Apache2 default index page will be displayed in case the web server is live and working.
+
+
+
+
+
+
+
+
+
+Step 2: Install MySQL Database Server
+Now, we require to install the MySQL database server by executing the command as follows:
+	
+During the package installation, you will be prompted to set the root user password for mysql as seen in the image below. Choose a good and secure password, then hit the OK button twice to proceed further.
+	
+
+The database server deployment is not yet secure, for this reason, issue the following command to harden its security:
+	 
+Then you will be directed to install the ‘validate_password’ plugin, so type in Y/Yes and press Enter, and also accept the default password strength level.
+Importantly, if you do not want to change the root password, then type N/No when prompted to do so. Answer Y/Yes for the rest of the succeeding questions.
+Step 3: Install PHP and Modules
+Next, we shall install PHP and a few modules for it to work with the web and database servers using the command below:
+	 
+Furthermore, to test if php is working in collaboration with the web server, we need to create an info.php file inside /var/www/html.
+
+And paste the code below into the file, save it and exit.
+
+ When that is done, open your web browser and type this address http://server_address/info.php. You should be able to view the php information page as confirmation.
+Step 4: Install WordPress CMS
+Download the latest WordPress package and extract it by issuing the commands below on the terminal:
+	 
+
+Then move the WordPress files from the extracted folder to the Apache default root directory, /var/www/html/:
+	
+Next, set the correct permissions on the website directory, i.e. grant ownership of the WordPress files to the web server as follows:
+	   
+Step 5: Create WordPress Database
+Execute the command below and provide the root user password, then select Enter to move to the mysql shell:
+	  
+At the mysql shell, type the following commands, pressing Enter after each line of a mysql command. Remember to use your own, valid values for database_name, databaseuser, and also use a strong and secure password as databaseuser_password:
+
+mysql>	 CREATE DATABASE wp_myblog;
+mysql>	 GRANT ALL PRIVILEGES ON wp_myblog.* TO 'your_username_here'@'localhost' IDENTIFIED BY 'your_chosen_password_here';
+mysql>	 FLUSH PRIVILEGES;
+mysql>	 EXIT;
+Go the /var/www/html/ directory and rename existing wp-config-sample.php to wp-config.php:
+	 
+then update it with your database information under the MySQL settings section:
+define('DB_NAME', 'database_name_here'); 
+define('DB_USER', 'username_here'); 
+define('DB_PASSWORD', 'password_here'); 
+define('DB_HOST', 'localhost'); 
+define('DB_CHARSET', 'utf8');  
+define('DB_COLLATE', '');
+Afterwards, restart the web server and mysql service using the commands below:
+	 
+	 
+
+Open your web browser, then enter your server address: http://server-address to get the welcome page below. Read through the page and click on “Let’s go!” to proceed further and fill all requested on-screen information.
+
